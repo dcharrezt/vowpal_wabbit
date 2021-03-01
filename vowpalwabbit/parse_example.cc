@@ -477,9 +477,14 @@ void substring_to_example(vw* all, example* ae, VW::string_view example)
             all->example_parser->words.back().front() == '\''))  // The last field is a tag, so record and strip it off
     {
       VW::string_view tag = all->example_parser->words.back();
-      all->example_parser->words.pop_back();
-      if (tag.front() == '\'') tag.remove_prefix(1);
-      push_many(ae->tag, tag.begin(), tag.size());
+      if (all->tag_to_ignore == tag) {
+          std::cout << "ignoring " << tag << std::endl;
+          // Delete line from examples
+      } else {
+          all->example_parser->words.pop_back();
+          if (tag.front() == '\'') tag.remove_prefix(1);
+          push_many(ae->tag, tag.begin(), tag.size());
+      }
     }
   }
 

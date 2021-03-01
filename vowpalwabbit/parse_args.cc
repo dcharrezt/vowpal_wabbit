@@ -1043,6 +1043,7 @@ void parse_example_tweaks(options_i& options, vw& all)
   float loss_parameter = 0.0;
   size_t early_terminate_passes;
   bool test_only = false;
+  std::string ignore_tag;
 
   option_group_definition example_options("Example options");
   example_options.add(make_option("testonly", test_only).short_name("t").help("Ignore label information and just test"))
@@ -1073,11 +1074,14 @@ void parse_example_tweaks(options_i& options, vw& all)
       .add(make_option("l1", all.l1_lambda).help("l_1 lambda"))
       .add(make_option("l2", all.l2_lambda).help("l_2 lambda"))
       .add(make_option("no_bias_regularization", all.no_bias).help("no bias in regularization"))
+      .add(make_option("ignore_tag", ignore_tag).help("ignore tags with <tag>"))
       .add(make_option("named_labels", named_labels)
                .keep()
                .help("use names for labels (multiclass, etc.) rather than integers, argument specified all possible "
                      "labels, comma-sep, eg \"--named_labels Noun,Verb,Adj,Punc\""));
   options.add_and_parse(example_options);
+    
+  if (ignore_tag.length() > 0 ){ all.tag_to_ignore = ignore_tag;}
 
   if (test_only || all.eta == 0.)
   {

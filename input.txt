@@ -1,0 +1,6 @@
+0.5 foo| a c
+0.5 bar| a
+0.5 ignore| b
+1 ignore| a b
+0 | c
+1 foo2| a b

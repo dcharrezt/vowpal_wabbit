@@ -423,6 +423,7 @@ public:
   float l1_lambda;  // the level of l_1 regularization to impose.
   float l2_lambda;  // the level of l_2 regularization to impose.
   bool no_bias;     // no bias in regularization
+  std::string tag_to_ignore;  // tag to ignore tag <tag>
   float power_t;    // the power on learning rate decay.
   int reg_mode;
 
